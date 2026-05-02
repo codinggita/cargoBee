@@ -4,14 +4,13 @@ import { useDispatch } from 'react-redux';
 import { loginSuccess } from './features/authSlice';
 import { getLocalItem } from './utils/storage';
 
-// Eagerly loaded pages
 import SplashScreen from './pages/SplashScreen';
 import Onboarding from './pages/Onboarding';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
-// Lazy loaded (Chunk 3)
 const Home = lazy(() => import('./pages/Home'));
+const AddressSearch = lazy(() => import('./pages/AddressSearch'));
 
 const LoadingScreen = () => (
   <div className="h-screen w-screen flex items-center justify-center bg-background">
@@ -57,11 +56,8 @@ const App = () => {
 
           <Route path="/home" element={<Home />} />
 
-          <Route path="/address-search" element={
-            <div className="min-h-screen flex items-center justify-center bg-background">
-              <h1 className="text-2xl font-bold text-accent">Address Search (Coming in next chunk)</h1>
-            </div>
-          } />
+          <Route path="/address-search" element={<AddressSearch />} />
+
           <Route path="/driver-matching" element={
             <div className="min-h-screen flex items-center justify-center bg-background">
               <h1 className="text-2xl font-bold text-accent">Driver Matching (Coming in next chunk)</h1>
