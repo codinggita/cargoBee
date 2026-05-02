@@ -11,6 +11,7 @@ import Register from './pages/Register';
 
 const Home = lazy(() => import('./pages/Home'));
 const AddressSearch = lazy(() => import('./pages/AddressSearch'));
+const DriverMatching = lazy(() => import('./pages/DriverMatching'));
 
 const LoadingScreen = () => (
   <div className="h-screen w-screen flex items-center justify-center bg-background">
@@ -50,17 +51,16 @@ const App = () => {
 
           <Route path="/splash" element={<SplashScreen />} />
           <Route path="/onboarding" element={<Onboarding />} />
-
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
           <Route path="/home" element={<Home />} />
-
           <Route path="/address-search" element={<AddressSearch />} />
+          <Route path="/driver-matching" element={<DriverMatching />} />
 
-          <Route path="/driver-matching" element={
+          {/* Placeholders for upcoming pages */}
+          <Route path="/driver-confirmed" element={
             <div className="min-h-screen flex items-center justify-center bg-background">
-              <h1 className="text-2xl font-bold text-accent">Driver Matching (Coming in next chunk)</h1>
+              <h1 className="text-2xl font-bold text-accent">Driver Confirmed (Coming in next chunk)</h1>
             </div>
           } />
           <Route path="/trips" element={
@@ -73,8 +73,6 @@ const App = () => {
               <h1 className="text-2xl font-bold text-accent">Profile (Coming in next chunk)</h1>
             </div>
           } />
-
-          {/* Driver placeholder */}
           <Route path="/driver/dashboard" element={
             <div className="min-h-screen flex items-center justify-center bg-background">
               <h1 className="text-2xl font-bold text-accent">Driver Dashboard (Coming in later chunk)</h1>
