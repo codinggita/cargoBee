@@ -12,6 +12,7 @@ import Register from './pages/Register';
 const Home = lazy(() => import('./pages/Home'));
 const AddressSearch = lazy(() => import('./pages/AddressSearch'));
 const DriverMatching = lazy(() => import('./pages/DriverMatching'));
+const LiveTracking = lazy(() => import('./pages/LiveTracking'));
 
 const LoadingScreen = () => (
   <div className="h-screen w-screen flex items-center justify-center bg-background">
@@ -56,11 +57,12 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/address-search" element={<AddressSearch />} />
           <Route path="/driver-matching" element={<DriverMatching />} />
+          <Route path="/live-tracking" element={<LiveTracking />} />
 
           {/* Placeholders for upcoming pages */}
-          <Route path="/driver-confirmed" element={
+          <Route path="/trip-completion" element={
             <div className="min-h-screen flex items-center justify-center bg-background">
-              <h1 className="text-2xl font-bold text-accent">Driver Confirmed (Coming in next chunk)</h1>
+              <h1 className="text-2xl font-bold text-accent">Trip Completion (Coming in next chunk)</h1>
             </div>
           } />
           <Route path="/trips" element={
