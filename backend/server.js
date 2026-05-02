@@ -5,18 +5,18 @@ const { Server } = require('socket.io');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 
-const connectDB = require('./config/db');
-const { initSockets } = require('./sockets/trip.socket');
+const connectDB = require('./src/config/db');
+const { initSockets } = require('./src/sockets/trip.socket');
 
 // Route imports
-const authRoutes    = require('./routes/auth.routes');
-const userRoutes    = require('./routes/user.routes');
-const tripRoutes    = require('./routes/trip.routes');
-const driverRoutes  = require('./routes/driver.routes');
-const driversRoutes = require('./routes/drivers.routes');
-const vehicleRoutes = require('./routes/vehicle.routes');
-const bookingRoutes = require('./routes/bookingRoutes');
-const paymentRoutes = require('./routes/paymentRoutes');
+const authRoutes    = require('./src/routes/auth.routes');
+const userRoutes    = require('./src/routes/user.routes');
+const tripRoutes    = require('./src/routes/trip.routes');
+const driverRoutes  = require('./src/routes/driver.routes');
+const driversRoutes = require('./src/routes/drivers.routes');
+const vehicleRoutes = require('./src/routes/vehicle.routes');
+const bookingRoutes = require('./src/routes/bookingRoutes');
+const paymentRoutes = require('./src/routes/paymentRoutes');
 
 // Connect to MongoDB
 connectDB();
@@ -76,7 +76,7 @@ app.use((req, res) => {
 });
 
 // ─── Global error handler ────────────────────────────────────────────────────
-const { errorHandler } = require('./middleware/errorHandler');
+const { errorHandler } = require('./src/middleware/errorHandler');
 app.use(errorHandler);
 
 // ─── Start server ─────────────────────────────────────────────────────────────

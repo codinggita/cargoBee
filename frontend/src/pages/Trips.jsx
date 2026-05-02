@@ -50,7 +50,7 @@ const Trips = () => {
           <h2 className="text-sm font-medium text-textSecondary">My Trips</h2>
           <div className="flex items-center gap-4 text-textSecondary">
             <button className="hover:text-accent transition-colors"><MapPin size={20} /></button>
-            <button className="w-8 h-8 rounded-full border border-border bg-gray-100 flex items-center justify-center"><User size={18} /></button>
+            <button className="w-8 h-8 rounded-full border border-border bg-background flex items-center justify-center"><User size={18} /></button>
           </div>
         </header>
 
@@ -116,7 +116,7 @@ const Trips = () => {
                   <h2 className="text-lg font-bold text-accent">{selectedTrip.vehicle}</h2>
                 </div>
               </div>
-              <button onClick={() => setSelectedTrip(null)} className="p-2 hover:bg-gray-100 rounded-full transition-colors"><X size={20} className="text-textSecondary" /></button>
+              <button onClick={() => setSelectedTrip(null)} className="p-2 hover:bg-background rounded-full transition-colors"><X size={20} className="text-textSecondary" /></button>
             </div>
 
             <div className="p-6 space-y-5">

@@ -85,7 +85,7 @@ const Onboarding = () => {
     const slide = slides[currentSlide];
 
     return (
-        <PageWrapper className="flex flex-col h-screen relative bg-[#FAFAFA] page-enter font-sans overflow-hidden">
+        <PageWrapper className="flex flex-col h-screen relative bg-background page-enter font-sans overflow-hidden">
             {/* Header */}
             <div className="flex justify-between items-center p-6 lg:px-12 lg:py-8 z-10 w-full shrink-0">
                 <div className="font-bold text-xl flex items-center gap-2 text-accent">
@@ -94,7 +94,7 @@ const Onboarding = () => {
                 </div>
                 <button
                     onClick={handleSkip}
-                    className="bg-gray-100 hover:bg-gray-200 text-accent font-semibold text-sm px-5 py-2 rounded-full transition-colors"
+                    className="bg-gray-100 dark:bg-gray-200 hover:bg-gray-200 dark:hover:bg-gray-300 text-accent font-semibold text-sm px-5 py-2 rounded-full transition-colors"
                 >
                     Skip Intro
                 </button>
@@ -108,7 +108,7 @@ const Onboarding = () => {
             >
                 {/* Left: Image Carousel */}
                 <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 h-[45vh] lg:h-full">
-                    <div className="relative w-full max-w-md aspect-square bg-white rounded-[40px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] p-3 lg:p-4 transition-all duration-500">
+                    <div className="relative w-full max-w-md aspect-square bg-surface rounded-[40px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] p-3 lg:p-4 transition-all duration-500">
                         {slide.image ? (
                             <img
                                 src={slide.image}
@@ -129,7 +129,7 @@ const Onboarding = () => {
                         <h1 className="text-4xl lg:text-5xl font-black leading-[1.15] mb-6 text-accent">
                             {slide.title}
                         </h1>
-                        <p className="text-gray-500 leading-relaxed text-base lg:text-lg mb-6">
+                        <p className="text-textSecondary leading-relaxed text-base lg:text-lg mb-6">
                             {slide.description}
                         </p>
 
@@ -141,7 +141,7 @@ const Onboarding = () => {
                             {slides.map((_, idx) => (
                                 <div
                                     key={idx}
-                                    className={`h-1.5 rounded-full transition-all duration-300 ${currentSlide === idx ? 'w-10 bg-[#F5A623]' : 'w-2 bg-gray-200'
+                                    className={`h-1.5 rounded-full transition-all duration-300 ${currentSlide === idx ? 'w-10 bg-[#F5A623]' : 'w-2 bg-gray-200 dark:bg-gray-400'
                                         }`}
                                 />
                             ))}
@@ -157,7 +157,7 @@ const Onboarding = () => {
                         </Button>
 
                         {/* Login Link */}
-                        <p className="mt-6 text-sm text-gray-500 font-medium">
+                        <p className="mt-6 text-sm text-textSecondary font-medium">
                             Already have an account?{' '}
                             <button onClick={() => navigate('/login')} className="text-[#F5A623] font-bold hover:underline">
                                 Log in

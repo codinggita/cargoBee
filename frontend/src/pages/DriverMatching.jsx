@@ -264,14 +264,14 @@ const DriverMatching = () => {
           <div className="bg-background rounded-2xl p-4 border border-border">
             <div className="text-[10px] font-black text-textSecondary uppercase tracking-widest mb-3">Route</div>
             <div className="relative pl-6">
-              <div className="absolute left-[5px] top-2 bottom-2 border-l-2 border-dashed border-gray-200 dark:border-gray-700" />
+              <div className="absolute left-[5px] top-2 bottom-2 border-l-2 border-dashed border-gray-200 dark:border-gray-600" />
               <div className="relative mb-4">
-                <div className="absolute -left-[27px] top-1.5 w-2.5 h-2.5 bg-success rounded-full ring-4 ring-white dark:ring-gray-900 z-10" />
+                <div className="absolute -left-[27px] top-1.5 w-2.5 h-2.5 bg-success rounded-full ring-4 ring-surface z-10" />
                 <div className="text-[9px] font-bold text-textSecondary uppercase tracking-widest mb-0.5">Pickup</div>
                 <div className="text-sm font-semibold text-accent leading-tight">{bookingState?.pickup?.address || 'Pickup Location'}</div>
               </div>
               <div className="relative">
-                <div className="absolute -left-[27px] top-1.5 w-2.5 h-2.5 bg-error rounded-full ring-4 ring-white dark:ring-gray-900 z-10" />
+                <div className="absolute -left-[27px] top-1.5 w-2.5 h-2.5 bg-error rounded-full ring-4 ring-surface z-10" />
                 <div className="text-[9px] font-bold text-textSecondary uppercase tracking-widest mb-0.5">Drop</div>
                 <div className="text-sm font-semibold text-accent leading-tight">{bookingState?.drop?.address || 'Drop Location'}</div>
               </div>
@@ -309,10 +309,10 @@ const DriverMatching = () => {
             <Navigation size={18} /> Track Live
           </Button>
           <div className="grid grid-cols-2 gap-2.5">
-            <Button variant="outline" className="py-3.5 flex items-center justify-center gap-2 border-gray-200 font-semibold text-sm">
+            <Button variant="outline" className="py-3.5 flex items-center justify-center gap-2 border-border font-semibold text-sm">
               <Phone size={16} /> Call Driver
             </Button>
-            <Button variant="outline" className="py-3.5 flex items-center justify-center gap-2 border-gray-200 font-semibold text-sm">
+            <Button variant="outline" className="py-3.5 flex items-center justify-center gap-2 border-border font-semibold text-sm">
               <MessageSquare size={16} /> Message
             </Button>
           </div>

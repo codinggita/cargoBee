@@ -37,6 +37,20 @@ const lightMapStyle = [
   { featureType: 'transit',             stylers: [{ visibility: 'off' }] },
 ];
 
+const darkMapStyle = [
+  { elementType: 'geometry',           stylers: [{ color: '#1e2535' }] },
+  { elementType: 'labels.text.stroke', stylers: [{ color: '#1e2535' }] },
+  { elementType: 'labels.text.fill',   stylers: [{ color: '#8a99b0' }] },
+  { featureType: 'road',               elementType: 'geometry',      stylers: [{ color: '#2c3a52' }] },
+  { featureType: 'road',               elementType: 'geometry.stroke',stylers: [{ color: '#1a2435' }] },
+  { featureType: 'road.highway',       elementType: 'geometry',      stylers: [{ color: '#3d5068' }] },
+  { featureType: 'road',               elementType: 'labels.text.fill',stylers: [{ color: '#8a99b0' }] },
+  { featureType: 'water',              elementType: 'geometry',      stylers: [{ color: '#0f1a2e' }] },
+  { featureType: 'poi',                stylers: [{ visibility: 'off' }] },
+  { featureType: 'transit',            stylers: [{ visibility: 'off' }] },
+  { featureType: 'administrative',     elementType: 'labels',        stylers: [{ visibility: 'simplified' }] },
+];
+
 const Home = () => {
   const navigate  = useNavigate();
   const location  = useLocation();
@@ -51,6 +65,16 @@ const Home = () => {
   const [duration, setDuration]           = useState('');
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [map, setMap]                     = useState(null);
+  const [isDark, setIsDark]               = useState(document.documentElement.classList.contains('dark'));
+
+  // Watch for theme changes
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -220,7 +244,7 @@ const Home = () => {
                     >
                       {v.tag && (
                         <span className={`absolute -top-2 left-1/2 -translate-x-1/2 text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider whitespace-nowrap ${
-                          active ? 'bg-primary text-white' : 'bg-gray-100 text-textSecondary'
+                          active ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-200 text-textSecondary'
                         }`}>
                           {v.tag}
                         </span>
@@ -301,14 +325,14 @@ const Home = () => {
         </div>
 
         {/* ── RIGHT PANEL — Map ── */}
-        <div className="flex-1 relative hidden md:block bg-gray-100">
+        <div className="flex-1 relative hidden md:block bg-background">
           {isLoaded ? (
             <GoogleMap
               mapContainerStyle={{ width: '100%', height: '100%' }}
               center={mapCenter}
               zoom={pickup?.lat ? 14 : 12}
               onLoad={m => setMap(m)}
-              options={{ styles: lightMapStyle, disableDefaultUI: true, zoomControl: true }}
+              options={{ styles: isDark ? darkMapStyle : lightMapStyle, disableDefaultUI: true, zoomControl: true }}
             >
               {pickup?.lat && !directionsResponse && <Marker position={{ lat: pickup.lat, lng: pickup.lng }} />}
               {drop?.lat  && !directionsResponse && <Marker position={{ lat: drop.lat,   lng: drop.lng   }} />}
@@ -322,7 +346,7 @@ const Home = () => {
               )}
             </GoogleMap>
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gray-100">
+            <div className="w-full h-full flex items-center justify-center bg-background">
               <div className="w-10 h-10 rounded-full border-4 border-border border-t-primary animate-spin" />
             </div>
           )}
@@ -330,7 +354,7 @@ const Home = () => {
           {/* Map overlay — no address selected */}
           {!pickup && !drop && (
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-border text-center">
+              <div className="bg-surface/80 dark:bg-surface/90 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-border text-center">
                 <MapPin size={28} className="text-primary mx-auto mb-2" />
                 <p className="text-sm font-bold text-accent">Select pickup & drop</p>
                 <p className="text-xs text-textSecondary">Route will appear here</p>
@@ -340,7 +364,7 @@ const Home = () => {
 
           {/* Floating route summary pill (top of map) */}
           {distance && duration && (
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white rounded-full px-5 py-2 shadow-lg border border-border flex items-center gap-3 text-sm font-semibold text-accent">
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-surface rounded-full px-5 py-2 shadow-lg border border-border flex items-center gap-3 text-sm font-semibold text-accent">
               <span className="text-primary">🛣️ {distance}</span>
               <span className="text-textSecondary/50">•</span>
               <span>⏱ {duration}</span>
@@ -362,7 +386,7 @@ const Home = () => {
               <p className="text-4xl font-black text-error mb-4">₹50</p>
               <p className="text-textSecondary text-sm mb-6">This will be deducted from your CargoBee Wallet.</p>
               <div className="flex gap-3">
-                <button onClick={() => setShowCancelModal(false)} className="flex-1 py-3 border-2 border-border rounded-2xl font-bold text-accent hover:bg-gray-50 transition-colors">
+                <button onClick={() => setShowCancelModal(false)} className="flex-1 py-3 border-2 border-border rounded-2xl font-bold text-accent hover:bg-background transition-colors">
                   Keep Booking
                 </button>
                 <Button onClick={handleCancelBooking} className="flex-1 py-3 bg-error hover:bg-error/90 text-white shadow-lg shadow-error/30">

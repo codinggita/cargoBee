@@ -5,13 +5,67 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-primary: 245 166 35;
+    --color-primary-dark: 212 134 10;
+    --color-accent: 26 26 46;
+    --color-secondary: 22 33 62;
+    --color-success: 39 174 96;
+    --color-error: 231 76 60;
+    --color-background: 250 250 247;
+    --color-surface: 255 255 255;
+    --color-border: 232 232 232;
+    --color-text-primary: 28 28 30;
+    --color-text-secondary: 107 114 128;
+
+    /* Gray scale for light mode */
+    --color-gray-50: 249 250 251;
+    --color-gray-100: 243 244 246;
+    --color-gray-200: 229 231 235;
+    --color-gray-300: 209 213 219;
+    --color-gray-400: 156 163 175;
+    --color-gray-500: 107 114 128;
+    --color-gray-600: 75 85 99;
+    --color-gray-700: 55 65 81;
+    --color-gray-800: 31 41 55;
+    --color-gray-900: 17 24 39;
+  }
+
+  .dark {
+    --color-primary: 245 166 35;
+    --color-primary-dark: 212 134 10;
+    --color-accent: 250 250 247;
+    --color-secondary: 40 40 60;
+    --color-success: 46 204 113;
+    --color-error: 231 76 60;
+    --color-background: 18 18 20;
+    --color-surface: 28 28 30;
+    --color-border: 60 60 60;
+    --color-text-primary: 240 240 240;
+    --color-text-secondary: 156 163 175;
+
+    /* Gray scale for dark mode (inverted) */
+    --color-gray-50: 24 24 27;
+    --color-gray-100: 39 39 42;
+    --color-gray-200: 63 63 70;
+    --color-gray-300: 82 82 91;
+    --color-gray-400: 161 161 170;
+    --color-gray-500: 107 114 128;
+    --color-gray-600: 156 163 175;
+    --color-gray-700: 209 213 219;
+    --color-gray-800: 229 231 235;
+    --color-gray-900: 243 244 246;
+  }
+
   html {
     scroll-behavior: smooth;
   }
+
   body {
-    @apply bg-background text-textPrimary antialiased;
+    @apply bg-background text-textPrimary antialiased transition-colors duration-300;
     font-family: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
   }
+
   * {
     box-sizing: border-box;
   }
@@ -38,7 +92,7 @@
 
   /* === Outline Button === */
   .btn-outline {
-    @apply bg-white border border-border hover:border-primary hover:text-primary
+    @apply bg-surface border border-border hover:border-primary hover:text-primary
            text-textPrimary font-semibold rounded-full px-6 py-3
            transition-all duration-200 cursor-pointer
            focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
@@ -47,7 +101,7 @@
   /* === Input Field === */
   .cb-input {
     @apply w-full border border-border rounded-xl px-4 py-3 text-sm text-textPrimary
-           placeholder-textSecondary bg-white outline-none
+           placeholder-textSecondary bg-surface outline-none
            focus:border-primary focus:ring-2 focus:ring-primary/20
            transition-all duration-200;
   }
@@ -96,7 +150,21 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* === Modal slide-up animation === */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
 /* === Dotted card border (Login) === */
 .dotted-card {
-  border: 1.5px dashed #E8E8E8;
+  border: 1.5px dashed rgb(var(--color-border));
+}
+
+/* === Google Maps Dark Mode Fix === */
+.gm-style-iw, .gm-style-iw-c, .gm-style-iw-d, .gm-style-iw-t {
+  color: #1A1A1A !important;
+}
+.gm-style-iw * {
+  color: #1A1A1A !important;
 }

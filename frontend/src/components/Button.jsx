@@ -15,8 +15,8 @@ const Button = ({
   
   const variantClasses = {
     primary: 'bg-primary hover:bg-primaryDark text-white active:scale-95 disabled:bg-primary/50 disabled:cursor-not-allowed',
-    outline: 'bg-white border-2 border-border hover:border-primary text-textPrimary hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed',
-    ghost: 'bg-transparent text-textPrimary hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed',
+    outline: 'bg-surface border-2 border-border hover:border-primary text-textPrimary hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed',
+    ghost: 'bg-transparent text-textPrimary hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed',
   };
 
   const widthClass = fullWidth ? 'w-full' : '';
