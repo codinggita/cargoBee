@@ -17,6 +17,7 @@ const TripCompletion = lazy(() => import('./pages/TripCompletion'));
 const RateExperience = lazy(() => import('./pages/RateExperience'));
 const Trips = lazy(() => import('./pages/Trips'));
 const Profile = lazy(() => import('./pages/Profile'));
+const DriverDashboard = lazy(() => import('./pages/DriverDashboard'));
 
 const LoadingScreen = () => (
   <div className="h-screen w-screen flex items-center justify-center bg-background">
@@ -54,6 +55,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/splash" replace />} />
 
+          {/* Consumer pages */}
           <Route path="/splash" element={<SplashScreen />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/login" element={<Login />} />
@@ -67,10 +69,18 @@ const App = () => {
           <Route path="/trips" element={<Trips />} />
           <Route path="/profile" element={<Profile />} />
 
-          {/* Placeholders for upcoming driver pages */}
-          <Route path="/driver/dashboard" element={
+          {/* Driver pages */}
+          <Route path="/driver/dashboard" element={<DriverDashboard />} />
+
+          {/* Placeholders for remaining driver pages */}
+          <Route path="/driver/active-trip" element={
             <div className="min-h-screen flex items-center justify-center bg-background">
-              <h1 className="text-2xl font-bold text-accent">Driver Dashboard (Coming in later chunk)</h1>
+              <h1 className="text-2xl font-bold text-accent">Driver Active Trip (Coming in next chunk)</h1>
+            </div>
+          } />
+          <Route path="/driver/earnings" element={
+            <div className="min-h-screen flex items-center justify-center bg-background">
+              <h1 className="text-2xl font-bold text-accent">Earnings (Coming in next chunk)</h1>
             </div>
           } />
         </Routes>
