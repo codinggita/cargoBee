@@ -14,6 +14,7 @@ import { auth, googleProvider } from '../config/firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { loginUser, googleAuthApi } from '../services/authService';
 import toast from 'react-hot-toast';
+import SEO from '../components/SEO';
 
 const Login = () => {
   const [role, setRole] = useState('consumer');
@@ -82,6 +83,7 @@ const Login = () => {
 
   return (
     <PageWrapper className="flex flex-col relative page-enter">
+      <SEO title="Login" description="Login to your CargoBee account to book trucks or accept trips." />
       {/* Decorative background */}
       <div
         className="absolute bottom-0 w-full h-48 opacity-10 pointer-events-none"

@@ -14,6 +14,7 @@ import { auth, googleProvider } from '../config/firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { registerUser, googleAuthApi } from '../services/authService';
 import toast from 'react-hot-toast';
+import SEO from '../components/SEO';
 
 const Register = () => {
   const [role, setRole] = useState('consumer');
@@ -79,6 +80,7 @@ const Register = () => {
 
   return (
     <PageWrapper className="flex flex-col relative page-enter">
+      <SEO title="Create Account" description="Join CargoBee today and get started with on-demand logistics." />
       {/* Decorative background */}
       <div
         className="absolute bottom-0 w-full h-48 opacity-10 pointer-events-none"
