@@ -56,7 +56,7 @@ const DriverActiveTrip = () => {
             />
           </GoogleMap>
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-100">
+          <div className="w-full h-full flex items-center justify-center bg-background">
             <span className="text-textSecondary">Loading map…</span>
           </div>
         )}
@@ -93,7 +93,7 @@ const DriverActiveTrip = () => {
         <div className="flex gap-3">
           <Button
             variant="outline"
-            className="flex-1 py-3.5 border-gray-200 hover:bg-gray-50 flex items-center justify-center gap-2"
+            className="flex-1 py-3.5 border-border hover:bg-background flex items-center justify-center gap-2"
           >
             <Phone size={18} />
             Call Customer

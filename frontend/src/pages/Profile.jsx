@@ -138,8 +138,8 @@ const Profile = () => {
             {/* ── Profile Card ─────────────────────────────────────────── */}
             <div className="bg-surface rounded-3xl p-8 border border-border shadow-sm flex flex-col md:flex-row items-center md:items-start gap-8">
               <div className="relative">
-                <AvatarInitials name={displayName} size={128} className="border-4 border-white" />
-                <div className="absolute bottom-0 right-0 bg-success text-white p-2 rounded-full border-2 border-white shadow-md">
+                <AvatarInitials name={displayName} size={128} className="border-4 border-surface" />
+                <div className="absolute bottom-0 right-0 bg-success text-white p-2 rounded-full border-2 border-surface shadow-md">
                   <ShieldCheck size={20} />
                 </div>
               </div>
@@ -275,7 +275,7 @@ const Profile = () => {
                     </div>
                     {/* Toggle pill */}
                     <div
-                      className={`w-11 h-6 rounded-full relative transition-colors duration-300 shadow-inner ${notificationsOn ? 'bg-primary' : 'bg-gray-300'}`}
+                      className={`w-11 h-6 rounded-full relative transition-colors duration-300 shadow-inner ${notificationsOn ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'}`}
                     >
                       <div
                         className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-all duration-300 ${notificationsOn ? 'left-6' : 'left-1'}`}

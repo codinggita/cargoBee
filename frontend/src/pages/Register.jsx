@@ -108,19 +108,17 @@ const Register = () => {
           </div>
 
           {/* Role Selector */}
-          <div className="flex p-1 bg-gray-100 rounded-xl mb-8">
+          <div className="flex p-1 bg-gray-100 dark:bg-gray-200 rounded-xl mb-8">
             <button
               type="button"
-              className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${role === 'consumer' ? 'bg-accent text-white dark:text-black shadow-sm' : 'hover:text-accent'
+              className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${role === 'consumer' ? 'bg-accent text-white dark:text-black shadow-sm' : 'text-textSecondary hover:text-accent'
                 }`}
-              style={role !== 'consumer' ? { color: '#111' } : {}}
               onClick={() => setRole('consumer')}
             >Consumer</button>
             <button
               type="button"
-              className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${role === 'driver' ? 'bg-accent text-white dark:text-black shadow-sm' : 'hover:text-accent'
+              className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${role === 'driver' ? 'bg-accent text-white dark:text-black shadow-sm' : 'text-textSecondary hover:text-accent'
                 }`}
-              style={role !== 'driver' ? { color: '#111' } : {}}
               onClick={() => setRole('driver')}
             >Driver Partner</button>
           </div>

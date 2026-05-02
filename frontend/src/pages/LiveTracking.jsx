@@ -8,6 +8,20 @@ import Button from '../components/Button';
 import ThemeToggle from '../components/ThemeToggle';
 import logo from '../assets/bee-logo.png';
 
+const darkMapStyle = [
+  { elementType: 'geometry',           stylers: [{ color: '#1e2535' }] },
+  { elementType: 'labels.text.stroke', stylers: [{ color: '#1e2535' }] },
+  { elementType: 'labels.text.fill',   stylers: [{ color: '#8a99b0' }] },
+  { featureType: 'road',               elementType: 'geometry',      stylers: [{ color: '#2c3a52' }] },
+  { featureType: 'road',               elementType: 'geometry.stroke',stylers: [{ color: '#1a2435' }] },
+  { featureType: 'road.highway',       elementType: 'geometry',      stylers: [{ color: '#3d5068' }] },
+  { featureType: 'road',               elementType: 'labels.text.fill',stylers: [{ color: '#8a99b0' }] },
+  { featureType: 'water',              elementType: 'geometry',      stylers: [{ color: '#0f1a2e' }] },
+  { featureType: 'poi',                stylers: [{ visibility: 'off' }] },
+  { featureType: 'transit',            stylers: [{ visibility: 'off' }] },
+  { featureType: 'administrative',     elementType: 'labels',        stylers: [{ visibility: 'simplified' }] },
+];
+
 const libraries = ['places'];
 
 const lightMapStyle = [
@@ -28,6 +42,16 @@ const LiveTracking = () => {
   const [directionsResponse, setDirectionsResponse] = useState(null);
   // Truck position: interpolates between pickup and drop over 30s
   const [truckProgress, setTruckProgress] = useState(0.15);
+  const [isDark, setIsDark] = useState(document.documentElement.classList.contains('dark'));
+
+  // Watch for theme changes
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
   const progressRef = useRef(null);
 
   useEffect(() => {
@@ -134,7 +158,7 @@ const LiveTracking = () => {
               center={mapCenter}
               zoom={14}
               onLoad={(m) => setMap(m)}
-              options={{ styles: lightMapStyle, disableDefaultUI: true }}
+              options={{ styles: isDark ? darkMapStyle : lightMapStyle, disableDefaultUI: true }}
             >
               {/* Saffron dashed route */}
               {directionsResponse && (
@@ -165,14 +189,14 @@ const LiveTracking = () => {
               {/* Pickup marker */}
               {bookingState?.pickup?.lat && (
                 <OverlayView position={bookingState.pickup} mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
-                  <div className="w-4 h-4 bg-success border-4 border-white rounded-full shadow-md -ml-2 -mt-2" />
+                  <div className="w-4 h-4 bg-success border-4 border-surface rounded-full shadow-md -ml-2 -mt-2" />
                 </OverlayView>
               )}
 
               {/* Drop marker */}
               {bookingState?.drop?.lat && (
                 <OverlayView position={bookingState.drop} mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
-                  <div className="w-4 h-4 bg-error border-4 border-white rounded-full shadow-md -ml-2 -mt-2" />
+                  <div className="w-4 h-4 bg-error border-4 border-surface rounded-full shadow-md -ml-2 -mt-2" />
                 </OverlayView>
               )}
 
@@ -206,7 +230,7 @@ const LiveTracking = () => {
               </div>
             </div>
             {/* Progress bar */}
-            <div className="mt-3 w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+            <div className="mt-3 w-full h-1.5 bg-gray-100 dark:bg-gray-200 rounded-full overflow-hidden">
               <div
                 className="h-full bg-primary rounded-full transition-all duration-300"
                 style={{ width: `${truckProgress * 100}%` }}
@@ -235,14 +259,14 @@ const LiveTracking = () => {
 
             {/* Timeline */}
             <div className="relative pl-6 mb-4">
-              <div className="absolute left-2 top-1.5 bottom-1.5 w-[2px] bg-gray-200 border-l-2 border-dashed border-gray-300" />
+              <div className="absolute left-2 top-1.5 bottom-1.5 w-[2px] bg-gray-200 dark:bg-gray-700 border-l-2 border-dashed border-gray-300 dark:border-gray-600" />
               <div className="relative mb-4">
-                <div className="absolute -left-6 top-1 w-3 h-3 bg-success border-2 border-white rounded-full z-10" />
+                <div className="absolute -left-6 top-1 w-3 h-3 bg-success border-2 border-surface rounded-full z-10" />
                 <div className="text-[10px] font-bold text-accent mb-0.5">Pickup</div>
                 <div className="text-xs text-textSecondary leading-tight">{bookingState?.pickup?.address || 'Pickup Location'}</div>
               </div>
               <div className="relative">
-                <div className="absolute -left-6 top-1 w-3 h-3 bg-error border-2 border-white rounded-full z-10" />
+                <div className="absolute -left-6 top-1 w-3 h-3 bg-error border-2 border-surface rounded-full z-10" />
                 <div className="text-[10px] font-bold text-accent mb-0.5">Dropoff</div>
                 <div className="text-xs text-textSecondary leading-tight">{bookingState?.drop?.address || 'Drop Location'}</div>
               </div>
@@ -250,10 +274,10 @@ const LiveTracking = () => {
 
             {/* Actions */}
             <div className="flex gap-3 mb-3">
-              <Button variant="outline" className="flex-1 py-2.5 text-sm bg-gray-50 border-transparent hover:bg-gray-100 flex gap-2 justify-center items-center">
+              <Button variant="outline" className="flex-1 py-2.5 text-sm bg-background border-transparent hover:bg-gray-100 dark:hover:bg-gray-800 flex gap-2 justify-center items-center">
                 <MessageSquare size={16} /> Message
               </Button>
-              <Button variant="outline" className="flex-1 py-2.5 text-sm bg-gray-50 border-transparent hover:bg-gray-100 flex gap-2 justify-center items-center">
+              <Button variant="outline" className="flex-1 py-2.5 text-sm bg-background border-transparent hover:bg-gray-100 dark:hover:bg-gray-800 flex gap-2 justify-center items-center">
                 <Share2 size={16} /> Share
               </Button>
             </div>
@@ -270,14 +294,14 @@ const LiveTracking = () => {
 
         {/* Map Controls (Right) */}
         <div className="absolute top-6 right-6 z-10 flex flex-col gap-2">
-          <button onClick={handleZoomIn} className="w-10 h-10 bg-surface rounded-xl shadow-md flex items-center justify-center text-accent hover:bg-gray-50 border border-border"><Plus size={20} /></button>
-          <button onClick={handleZoomOut} className="w-10 h-10 bg-surface rounded-xl shadow-md flex items-center justify-center text-accent hover:bg-gray-50 border border-border"><Minus size={20} /></button>
-          <button onClick={handleRecenter} className="w-10 h-10 bg-surface rounded-xl shadow-md flex items-center justify-center text-primary hover:bg-gray-50 border border-border mt-2"><Crosshair size={20} /></button>
+          <button onClick={handleZoomIn} className="w-10 h-10 bg-surface rounded-xl shadow-md flex items-center justify-center text-accent hover:bg-background border border-border"><Plus size={20} /></button>
+          <button onClick={handleZoomOut} className="w-10 h-10 bg-surface rounded-xl shadow-md flex items-center justify-center text-accent hover:bg-background border border-border"><Minus size={20} /></button>
+          <button onClick={handleRecenter} className="w-10 h-10 bg-surface rounded-xl shadow-md flex items-center justify-center text-primary hover:bg-background border border-border mt-2"><Crosshair size={20} /></button>
         </div>
       </div>
 
       {/* Bottom Information Bar */}
-      <div className="bg-[#f1f5f9] border-t border-border px-6 py-3 flex items-center justify-between z-20 shrink-0">
+      <div className="bg-surface border-t border-border px-6 py-3 flex items-center justify-between z-20 shrink-0">
         <div className="flex gap-8">
           <div>
             <div className="text-[10px] font-bold text-textSecondary uppercase tracking-widest mb-1">Order ID</div>
@@ -294,7 +318,7 @@ const LiveTracking = () => {
         </div>
         <div className="flex items-center gap-2 text-xs text-textSecondary">
           Live tracking active
-          <button className="p-1 hover:bg-gray-200 rounded text-accent transition-colors" onClick={handleRecenter}>
+          <button className="p-1 hover:bg-background rounded text-accent transition-colors" onClick={handleRecenter}>
             <RefreshCw size={14} />
           </button>
         </div>

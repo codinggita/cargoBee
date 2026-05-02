@@ -228,7 +228,7 @@ const DriverDashboard = () => {
                 </div>
                 <div className="bg-background rounded-xl p-4 border border-border mb-5">
                   <div className="relative pl-6">
-                    <div className="absolute left-[5px] top-2 bottom-2 border-l-2 border-dashed border-gray-300" />
+                    <div className="absolute left-[5px] top-2 bottom-2 border-l-2 border-dashed border-gray-300 dark:border-gray-600" />
                     <div className="relative mb-3">
                       <div className="absolute -left-[27px] top-1.5 w-2 h-2 bg-success rounded-full ring-4 ring-background z-10" />
                       <div className="text-[8px] font-bold text-textSecondary uppercase tracking-widest mb-0.5">Pickup</div>
