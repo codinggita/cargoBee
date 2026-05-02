@@ -6,6 +6,7 @@ import { GoogleMap, useJsApiLoader, Marker, DirectionsRenderer } from '@react-go
 import PageWrapper from '../components/PageWrapper';
 import Button from '../components/Button';
 import ThemeToggle from '../components/ThemeToggle';
+import SEO from '../components/SEO';
 import logo from '../assets/bee-logo.png';
 import toast from 'react-hot-toast';
 
@@ -139,9 +140,9 @@ const Home = () => {
   const mapCenter = pickup?.lat ? { lat: pickup.lat, lng: pickup.lng } : defaultCenter;
 
   return (
-    <PageWrapper className="flex flex-col h-screen overflow-hidden">
-
-      {/* ── Navbar ── */}
+    <PageWrapper className="relative bg-surface h-screen overflow-hidden flex flex-col page-enter">
+      <SEO title="Book a Truck" description="Book a truck instantly with CargoBee." />
+      {/* Navbar Overlay */}
       <header className="bg-surface border-b border-border h-16 flex items-center justify-between px-5 shrink-0 z-20 shadow-sm">
         <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigate('/home')}>
           <img src={logo} alt="CargoBee" className="w-8 h-8 object-contain" />
