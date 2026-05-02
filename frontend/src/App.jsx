@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from './features/authSlice';
@@ -10,6 +10,9 @@ import Onboarding from './pages/Onboarding';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
+// Lazy loaded (Chunk 3)
+const Home = lazy(() => import('./pages/Home'));
+
 const LoadingScreen = () => (
   <div className="h-screen w-screen flex items-center justify-center bg-background">
     <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#F5A623] border-t-transparent"></div>
@@ -20,7 +23,6 @@ const App = () => {
   const dispatch = useDispatch();
   const [isInitializing, setIsInitializing] = useState(true);
 
-  // Hydrate auth state from localStorage on app load
   useEffect(() => {
     const token = getLocalItem('cargobee_token');
     let user = getLocalItem('cargobee_user');
@@ -53,11 +55,30 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          <Route path="/home" element={
+          <Route path="/home" element={<Home />} />
+
+          <Route path="/address-search" element={
             <div className="min-h-screen flex items-center justify-center bg-background">
-              <h1 className="text-2xl font-bold text-accent">Home Page (Coming in Chunk 3)</h1>
+              <h1 className="text-2xl font-bold text-accent">Address Search (Coming in next chunk)</h1>
             </div>
           } />
+          <Route path="/driver-matching" element={
+            <div className="min-h-screen flex items-center justify-center bg-background">
+              <h1 className="text-2xl font-bold text-accent">Driver Matching (Coming in next chunk)</h1>
+            </div>
+          } />
+          <Route path="/trips" element={
+            <div className="min-h-screen flex items-center justify-center bg-background">
+              <h1 className="text-2xl font-bold text-accent">Trips (Coming in next chunk)</h1>
+            </div>
+          } />
+          <Route path="/profile" element={
+            <div className="min-h-screen flex items-center justify-center bg-background">
+              <h1 className="text-2xl font-bold text-accent">Profile (Coming in next chunk)</h1>
+            </div>
+          } />
+
+          {/* Driver placeholder */}
           <Route path="/driver/dashboard" element={
             <div className="min-h-screen flex items-center justify-center bg-background">
               <h1 className="text-2xl font-bold text-accent">Driver Dashboard (Coming in later chunk)</h1>
