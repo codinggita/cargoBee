@@ -19,6 +19,7 @@ const Trips = lazy(() => import('./pages/Trips'));
 const Profile = lazy(() => import('./pages/Profile'));
 const DriverDashboard = lazy(() => import('./pages/DriverDashboard'));
 const DriverActiveTrip = lazy(() => import('./pages/DriverActiveTrip'));
+const Earnings = lazy(() => import('./pages/Earnings'));
 
 const LoadingScreen = () => (
   <div className="h-screen w-screen flex items-center justify-center bg-background">
@@ -73,13 +74,7 @@ const App = () => {
           {/* Driver pages */}
           <Route path="/driver/dashboard" element={<DriverDashboard />} />
           <Route path="/driver/active-trip" element={<DriverActiveTrip />} />
-
-          {/* Placeholder for last driver page */}
-          <Route path="/driver/earnings" element={
-            <div className="min-h-screen flex items-center justify-center bg-background">
-              <h1 className="text-2xl font-bold text-accent">Earnings (Coming in next chunk)</h1>
-            </div>
-          } />
+          <Route path="/driver/earnings" element={<Earnings />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
